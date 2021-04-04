@@ -36,8 +36,8 @@ Licensed under the [Apache License, Version 2.0][license link].
 [doc link]: https://docs.rs/rustool
 [doc badge]: https://docs.rs/rustool/badge.svg
 [license link]: https://github.com/GregoireHENRY/rustool/blob/main/LICENSE
-[license badge]: https://img.shields.io/badge/License-Apache%202.0-blue.svg
+[license badge]: https://img.shields.io/badge/license-Apache%202.0-blue.svg
 [pre-commit link]: https://pre-commit.com
 [pre-commit badge]: https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white
-[coverage doc badge]: https://img.shields.io/badge/Documentation-100%25-brightgreen
-[coverage test badge]: https://img.shields.io/badge/Tests-100%25-brightgreen
+[coverage doc badge]: https://img.shields.io/badge/docs-100%25-brightgreen
+[coverage test badge]: https://img.shields.io/badge/tests-100%25-brightgreen
