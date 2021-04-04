@@ -1,0 +1,8 @@
+# default
+target/
+Cargo.lock
+
+# resources
+rsc/img/
+rsc/data/
+rsc/log/
