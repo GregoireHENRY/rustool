@@ -33,16 +33,16 @@ pub fn log_init(term_level: LevelFilter, write_level: LevelFilter) {
 #[macro_export]
 macro_rules! log_init {
     () => {
-        $crate::toolbox::log::log_init(
-            $crate::toolbox::log::DEFAULT_LEVEL_TERM,
-            $crate::toolbox::log::DEFAULT_LEVEL_WRITE,
+        $crate::core::log::log_init(
+            $crate::core::log::DEFAULT_LEVEL_TERM,
+            $crate::core::log::DEFAULT_LEVEL_WRITE,
         )
     };
     ($term_level:expr) => {
-        $crate::toolbox::log::log_init($term_level, $crate::toolbox::log::DEFAULT_LEVEL_WRITE)
+        $crate::core::log::log_init($term_level, $crate::toolbox::log::DEFAULT_LEVEL_WRITE)
     };
     ($term_level:expr, $write_level:expr) => {
-        $crate::toolbox::log::log_init($term_level, $write_level)
+        $crate::core::log::log_init($term_level, $write_level)
     };
 }
 
