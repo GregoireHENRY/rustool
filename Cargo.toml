@@ -1,6 +1,6 @@
 [package]
 name = "rustool"
-version = "0.2.0"
+version = "0.2.1"
 authors = ["Greg Henry <contact@greghenry.xyz>"]
 edition = "2018"
 description = "Personal toolbox for my Rust projects"
