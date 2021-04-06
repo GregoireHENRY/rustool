@@ -21,6 +21,7 @@ pub use crate::core::*;
 extern crate itertools;
 extern crate log;
 extern crate nalgebra as na;
+extern crate num_traits;
 extern crate simplelog;
 
 use na::base::storage::Storage;

@@ -5,7 +5,10 @@ pub mod geometry;
 pub mod log;
 /// Collection of functions for matrix usage.
 pub mod matrix;
+/// Numerical algorithms toolbox.
+pub mod numerical_algorithms;
 
 pub use self::geometry::*;
 pub use self::log::*;
 pub use self::matrix::*;
+pub use self::numerical_algorithms::*;
