@@ -20,11 +20,25 @@ What I do for you:
 
 To build and run the program, tests or examples:
 
-Usage: ./compile.py [OPTIONS]
-    -r, --release        build in release, default is debug
-    -e, --example [NAME] run the example [NAME]
-    -t, --test           launch fast tests
-    --all-targets        to be used with -t, runs all tests
+Usage: ./compile.py [OPTIONS] COMMAND [ARGS]...
+
+  Rust Project Builder Assistant.
+
+  By default, compile the binary from the main program in debug mode, and
+  run it. If you want to compile in release mode, for the main command or
+  any subcommand, use the release option.
+
+Options:
+  -v, --version  Show version.
+  -r, --release  Enable release mode.
+  -h, --help     Show this message and exit.
+
+Commands:
+  doc              Build documentation.
+  example          Compile and run an example.
+  publish          Publish your library on crates.io.
+  tests            Compile and execute unit and integration tests.
+  update-versions  Update versions in all files according to the manifest.
 """
 
 from pathlib import Path
