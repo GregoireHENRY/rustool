@@ -90,3 +90,11 @@ where
     }
     work_list
 }
+
+/// Compute the element-wise power of a vector.
+pub fn pows<T>(vector: &Matrix1xX<T>, power: i32) -> Matrix1xX<T>
+where
+    T: RealField,
+{
+    Matrix1xX::from_iterator(vector.nrows(), vector.iter().map(|x| x.powi(power)))
+}
