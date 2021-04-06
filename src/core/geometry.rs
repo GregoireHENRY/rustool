@@ -1,28 +1,60 @@
 use itertools::multizip;
-use na::{Matrix1xX, Matrix3xX, RealField};
+use na::{Matrix1xX, Matrix3x1, Matrix3xX, MatrixSlice3x1, RealField};
 
-/// Distance between two list of vectors 3xX.
-pub fn distances<T>(vectors: Matrix3xX<T>) -> Matrix1xX<T>
+/// Magnitudes of a list of vectors 3xX.
+pub fn magnitudes<T>(vectors: &Matrix3xX<T>) -> Matrix1xX<T>
 where
     T: RealField,
 {
     let number_vectors = vectors.ncols();
-    let mut distances = Matrix1xX::zeros(number_vectors);
-    for (distance, vector) in multizip((distances.iter_mut(), vectors.column_iter())) {
-        *distance = (vector).norm();
+    let mut magnitudes = Matrix1xX::<T>::zeros(number_vectors);
+    for (res, vector) in multizip((magnitudes.iter_mut(), vectors.column_iter())) {
+        *res = magnitude_slice(vector);
     }
-    distances
+    magnitudes
 }
 
-/// Directions from the origin to a list of points 3xX.
-pub fn directions<T>(vectors: Matrix3xX<T>) -> Matrix3xX<T>
+/// Magnitude of a vector 3x1.
+pub fn magnitude<T>(vector: &Matrix3x1<T>) -> T
+where
+    T: RealField,
+{
+    magnitude_slice(vector.column(0))
+}
+
+/// Magnitude of a slice 3x1.
+pub fn magnitude_slice<T>(vector: MatrixSlice3x1<T>) -> T
+where
+    T: RealField,
+{
+    (vector).norm()
+}
+
+/// Directions of a list of vectors 3xX.
+pub fn directions<T>(vectors: &Matrix3xX<T>) -> Matrix3xX<T>
 where
     T: RealField,
 {
     let number_vectors = vectors.ncols();
     let mut directions = Matrix3xX::zeros(number_vectors);
     for (mut direction, vector) in multizip((directions.column_iter_mut(), vectors.column_iter())) {
-        direction.copy_from(&(vector).normalize());
+        direction.copy_from(&direction_slice(vector));
     }
     directions
+}
+
+/// Direction of a vector 3x1.
+pub fn direction<T>(vector: &Matrix3x1<T>) -> Matrix3x1<T>
+where
+    T: RealField,
+{
+    direction_slice(vector.column(0))
+}
+
+/// Direction of a slice 3x1.
+pub fn direction_slice<T>(vector: MatrixSlice3x1<T>) -> Matrix3x1<T>
+where
+    T: RealField,
+{
+    (vector).normalize()
 }

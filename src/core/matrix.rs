@@ -1,13 +1,11 @@
 use itertools::multizip;
 use na::base::storage::Storage;
-use na::{
-    convert, Dim, Matrix, Matrix1xX, Matrix3x1, Matrix3xX, MatrixSlice3x1, RealField, Scalar,
-};
+use na::{convert, Dim, Matrix, Matrix1xX, Matrix3x1, Matrix3xX, MatrixSlice3x1, RealField};
 
 /// Slice whole matrix
 pub fn slice<N, R, C, S1>(matrix: &Matrix<N, R, C, S1>) -> crate::Slice<'_, N, R, C, S1>
 where
-    N: Scalar,
+    N: RealField,
     R: Dim,
     C: Dim,
     S1: Storage<N, R, C>,
@@ -69,4 +67,26 @@ where
     T: RealField,
 {
     slice(&vector_1).dot(&slice(&vector_2))
+}
+
+/// Clip all elements of a list between `min` and `max`. If `min` or `max` are `None`
+/// there is no limit.
+pub fn clip<T>(list: &Matrix1xX<T>, min: Option<T>, max: Option<T>) -> Matrix1xX<T>
+where
+    T: RealField,
+{
+    let mut work_list = list.clone();
+    for element in work_list.iter_mut() {
+        if let Some(mini) = min {
+            if *element < mini {
+                *element = mini
+            };
+        }
+        if let Some(max) = max {
+            if *element > max {
+                *element = max
+            };
+        }
+    }
+    work_list
 }

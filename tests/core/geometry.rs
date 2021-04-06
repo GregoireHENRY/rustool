@@ -1,13 +1,12 @@
 use itertools::multizip;
 use na::{Matrix1xX, Matrix3xX};
-use tool::{directions, distances};
 
 #[test]
 fn compute_distances() {
     let vectors = Matrix3xX::from_column_slice(&[1.0, 0.0, 0.0, 0.0, 1.0, 1.0]);
     let expected_distances = Matrix1xX::from_column_slice(&[1.0, 2.0f64.sqrt()]);
 
-    let distances = distances(vectors);
+    let distances = tool::magnitudes(&vectors);
 
     for (distance, expected_distance) in multizip((distances.iter(), expected_distances.iter())) {
         assert!(relative_eq!(
@@ -30,7 +29,7 @@ fn compute_directions() {
         1.0 / 2.0f64.sqrt(),
     ]);
 
-    let directions = directions(vectors);
+    let directions = tool::directions(&vectors);
 
     for (direction_projection, expected_direction_projection) in
         multizip((directions.iter(), expected_directions.iter()))

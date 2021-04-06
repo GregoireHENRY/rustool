@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 + rename dot_vectors to dot_products and added more dot products signatures
++ rename distances to magnitudes and added more signatures
 
 ## [0.2.0] - 2021-04-04
 
