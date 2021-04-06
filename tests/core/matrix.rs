@@ -1,6 +1,5 @@
 use itertools::multizip;
 use na::{Matrix1xX, Matrix3xX};
-use tool::{dot_vectors, linspace};
 
 #[test]
 fn test_size_range_with_step() {
@@ -33,7 +32,7 @@ fn test_linspace() {
     let step = 2.0;
     let expected_vector = Matrix1xX::from_column_slice(&[0.0, 2.0, 4.0, 6.0, 8.0, 10.0]);
 
-    let vector = linspace::<f64>(start, end, step);
+    let vector = tool::linspace::<f64>(start, end, step);
 
     assert_eq!(vector.len(), 6);
 
@@ -49,7 +48,7 @@ fn test_linspace_odd() {
     let step = 2.0;
     let expected_vector = Matrix1xX::from_column_slice(&[0.0, 2.0, 4.0, 6.0, 8.0, 10.0, 11.0]);
 
-    let vector = linspace(start, end, step);
+    let vector = tool::linspace(start, end, step);
 
     assert_eq!(vector.len(), 7);
 
@@ -63,7 +62,7 @@ fn test_dotproduct() {
     let vectors_1 = Matrix3xX::from_column_slice(&[1.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 1.0, 0.0]);
     let vectors_2 = Matrix3xX::from_column_slice(&[1.0, 0.0, 0.0, 1.0, 1.0, 0.0, 1.0, 0.0, 1.0]);
     let expected_dot_products = Matrix1xX::from_column_slice(&[1.0, 1.0, 0.0]);
-    let dot_products = dot_vectors(&vectors_1, &vectors_2);
+    let dot_products = tool::dot_products(&vectors_1, &vectors_2);
 
     for (dot_product, expected_dot_product) in
         multizip((dot_products.iter(), expected_dot_products.iter()))

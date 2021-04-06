@@ -13,12 +13,29 @@ rustool = "0.1.0"
 ```
 */
 
+/// Main functionalities.
+pub mod core;
+
+pub use crate::core::*;
+
 extern crate itertools;
 extern crate log;
 extern crate nalgebra as na;
 extern crate simplelog;
 
-/// Main functionalities.
-pub mod core;
+use na::base::storage::Storage;
+use na::{Dynamic, Matrix, SliceStorage};
 
-pub use crate::core::*;
+pub type Slice<'a, N, R, C, S1> = Matrix<
+    N,
+    Dynamic,
+    Dynamic,
+    SliceStorage<
+        'a,
+        N,
+        Dynamic,
+        Dynamic,
+        <S1 as Storage<N, R, C>>::RStride,
+        <S1 as Storage<N, R, C>>::CStride,
+    >,
+>;
