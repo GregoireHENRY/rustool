@@ -1,10 +1,9 @@
 use itertools::multizip;
-use na::{Matrix1xX, Matrix3xX};
 
 #[test]
 fn compute_distances() {
-    let vectors = Matrix3xX::from_column_slice(&[1.0, 0.0, 0.0, 0.0, 1.0, 1.0]);
-    let expected_distances = Matrix1xX::from_column_slice(&[1.0, 2.0f64.sqrt()]);
+    let vectors = tool::Vectors::from_row_slice(&[1.0, 0.0, 0.0, 0.0, 1.0, 1.0]);
+    let expected_distances = tool::List::from_row_slice(&[1.0, 2.0f64.sqrt()]);
 
     let distances = tool::magnitudes(&vectors);
 
@@ -19,8 +18,8 @@ fn compute_distances() {
 
 #[test]
 fn compute_directions() {
-    let vectors = Matrix3xX::from_column_slice(&[1.0, 0.0, 0.0, 0.0, 1.0, 1.0]);
-    let expected_directions = Matrix1xX::from_column_slice(&[
+    let vectors = tool::Vectors::from_row_slice(&[1.0, 0.0, 0.0, 0.0, 1.0, 1.0]);
+    let expected_directions = tool::Vectors::from_row_slice(&[
         1.0,
         0.0,
         0.0,

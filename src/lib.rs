@@ -9,7 +9,7 @@ Simply add the following to your `Cargo.toml` file:
 
 ```.ignore
 [dependencies]
-rustool = "0.2.1"
+rustool = "0.3.0"
 ```
 */
 
@@ -25,8 +25,18 @@ extern crate num_traits;
 extern crate simplelog;
 
 use na::base::storage::Storage;
-use na::{Dynamic, Matrix, SliceStorage};
+use na::{DVector, Dynamic, Matrix, MatrixXx3, RowVector3, SliceStorage};
 
+/// Type alias for [`DVector`]. The matrix has X rows and 1 column.
+pub type List<T> = DVector<T>;
+
+/// Type alias for [`Vector3`]. The matrix has 1 row and 3 columns.
+pub type Vector<T> = RowVector3<T>;
+
+/// Type alias for [`MatrixXx3`]. The matrix has X row and 3 columns.
+pub type Vectors<T> = MatrixXx3<T>;
+
+/// Type alias to define a slice of the size of its matrix.
 pub type Slice<'a, N, R, C, S1> = Matrix<
     N,
     Dynamic,

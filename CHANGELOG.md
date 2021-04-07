@@ -9,11 +9,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.0] - 2021-04-07
+
+## Added
+
++ types List, Vector, Vectors
+
+## Changed
+
++ list of vectors and list of scalars shapes
+
 ## [0.2.1] - 2021-04-06
 
 ## Added
 
-+ added distances and directions functions
++ distances and directions functions
 
 ## Changed
 

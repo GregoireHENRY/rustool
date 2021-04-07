@@ -1,6 +1,7 @@
+use crate::{List, Vectors};
 use itertools::multizip;
 use na::base::storage::Storage;
-use na::{convert, Dim, Matrix, Matrix1xX, Matrix3x1, Matrix3xX, MatrixSlice3x1, RealField};
+use na::{convert, Dim, Matrix, Matrix1xX, RealField};
 
 /// Slice whole matrix
 pub fn slice<N, R, C, S1>(matrix: &Matrix<N, R, C, S1>) -> crate::Slice<'_, N, R, C, S1>
@@ -12,6 +13,14 @@ where
 {
     let shape = matrix.shape();
     matrix.slice((0, 0), shape)
+}
+
+/// Number of vectors.
+pub fn number_vectors<T>(vectors: &Vectors<T>) -> usize
+where
+    T: RealField,
+{
+    vectors.nrows()
 }
 
 /// Compute the required size for vector to go from start to end with step.
@@ -38,40 +47,25 @@ where
 }
 
 /// Dot product vectorized between two list of vectors.
-pub fn dot_products<T>(vector_list_1: &Matrix3xX<T>, vector_list_2: &Matrix3xX<T>) -> Matrix1xX<T>
+pub fn dot_products<T>(vectors_1: &Vectors<T>, vectors_2: &Vectors<T>) -> List<T>
 where
     T: RealField,
 {
-    let mut dot_products = Matrix1xX::<T>::zeros(vector_list_1.ncols());
+    let size = crate::number_vectors(vectors_1);
+    let mut dot_products = List::<T>::zeros(size);
     for (res, vector_1, vector_2) in multizip((
         dot_products.iter_mut(),
-        vector_list_1.column_iter(),
-        vector_list_2.column_iter(),
+        vectors_1.row_iter(),
+        vectors_2.row_iter(),
     )) {
-        *res = dot_product_slice(vector_1, vector_2);
+        *res = vector_1.dot(&vector_2);
     }
     dot_products
 }
 
-/// Dot product between two vectors.
-pub fn dot_product<T>(vector_1: &Matrix3x1<T>, vector_2: &Matrix3x1<T>) -> T
-where
-    T: RealField,
-{
-    dot_product_slice(vector_1.column(0), vector_2.column(0))
-}
-
-/// Dot product between two slices.
-pub fn dot_product_slice<T>(vector_1: MatrixSlice3x1<T>, vector_2: MatrixSlice3x1<T>) -> T
-where
-    T: RealField,
-{
-    slice(&vector_1).dot(&slice(&vector_2))
-}
-
 /// Clip all elements of a list between `min` and `max`. If `min` or `max` are `None`
 /// there is no limit.
-pub fn clip<T>(list: &Matrix1xX<T>, min: Option<T>, max: Option<T>) -> Matrix1xX<T>
+pub fn clip<T>(list: &List<T>, min: Option<T>, max: Option<T>) -> List<T>
 where
     T: RealField,
 {
@@ -91,10 +85,10 @@ where
     work_list
 }
 
-/// Compute the element-wise power of a vector.
-pub fn pows<T>(vector: &Matrix1xX<T>, power: i32) -> Matrix1xX<T>
+/// Compute the element-wise power of a list.
+pub fn pows<T>(list: &List<T>, power: i32) -> List<T>
 where
     T: RealField,
 {
-    Matrix1xX::from_iterator(vector.nrows(), vector.iter().map(|x| x.powi(power)))
+    List::from_iterator(list.len(), list.iter().map(|x| x.powi(power)))
 }

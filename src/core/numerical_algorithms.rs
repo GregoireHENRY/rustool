@@ -1,5 +1,5 @@
+use crate::List;
 use itertools::all;
-use na::Matrix1xX;
 use na::RealField;
 use num_traits::NumCast;
 
@@ -46,8 +46,6 @@ pub const NEWTON_METHOD_THRESHOLD: f64 = 1e-5;
 /// # Example
 ///
 /// ```
-/// use nalgebra::Matrix1xX;
-///
 /// // The struct that contains your arguments for the Newton's method's function and derivative
 /// pub struct CustomNewtonMethodArguments<'a> {
 ///     some_other_value: &'a f64,
@@ -65,22 +63,22 @@ pub const NEWTON_METHOD_THRESHOLD: f64 = 1e-5;
 ///
 /// // Newton's method's function: f(x) = 100 - x ** 4 - x * some_other_value = 0
 /// pub fn newton_method_function(
-///     value: &Matrix1xX<f64>,
+///     value: &tool::List<f64>,
 ///     newton_method_arguments: &CustomNewtonMethodArguments,
-/// ) -> Matrix1xX<f64> {
+/// ) -> tool::List<f64> {
 ///     (-tool::pow(value, 4)).add_scalar(100.) - value * *newton_method_arguments.some_other_value
 /// }
 ///
 /// // Newton's method's function: f'(x) = - 4 * x ** 3 - some_other_value
 /// pub fn newton_method_derivative(
-///     value: &Matrix1xX<f64>,
+///     value: &tool::List<f64>,
 ///     newton_method_arguments: &CustomNewtonMethodArguments,
-/// ) ->Matrix1xX<f64> {
+/// ) ->tool::List<f64> {
 ///     (- 4. * tool::pow(value, 3)).add_scalar(-newton_method_arguments.some_other_value)
 /// }
 ///
 /// // The call of the Newton's method
-/// let my_initial_vector = Matrix1xX::<f64>::zeros(3);
+/// let my_initial_vector = tool::List::<f64>::zeros(3);
 /// let some_other_value = 12.;
 ///
 /// let result = tool::newton_method(
@@ -91,16 +89,16 @@ pub const NEWTON_METHOD_THRESHOLD: f64 = 1e-5;
 /// );
 /// ```
 pub fn newton_method<T, A>(
-    start_value: Matrix1xX<T>,
-    newton_method_function: impl Fn(&Matrix1xX<T>, &A) -> Matrix1xX<T>,
-    newton_method_derivative: impl Fn(&Matrix1xX<T>, &A) -> Matrix1xX<T>,
+    start_value: List<T>,
+    newton_method_function: impl Fn(&List<T>, &A) -> List<T>,
+    newton_method_derivative: impl Fn(&List<T>, &A) -> List<T>,
     newton_method_arguments: A,
-) -> Matrix1xX<T>
+) -> List<T>
 where
     T: RealField + NumCast,
     A: NewtonMethodArguments,
 {
-    let mut new_value: Matrix1xX<T>;
+    let mut new_value: List<T>;
     let mut current_value = start_value;
     let mut iteration = 0;
     'convergence: loop {
