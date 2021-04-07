@@ -9,54 +9,54 @@ where
     let number_vectors = vectors.ncols();
     let mut magnitudes = Matrix1xX::<T>::zeros(number_vectors);
     for (res, vector) in multizip((magnitudes.iter_mut(), vectors.column_iter())) {
-        *res = magnitude_slice(vector);
+        *res = vector.norm();
     }
     magnitudes
 }
 
-/// Magnitude of a vector 3x1.
-pub fn magnitude<T>(vector: &Matrix3x1<T>) -> T
+/// Distances from of a list of vectors 3xX to another one.
+pub fn distances<T>(vectors_1: &Matrix3xX<T>, vectors_2: &Matrix3xX<T>) -> Matrix1xX<T>
 where
     T: RealField,
 {
-    magnitude_slice(vector.column(0))
+    magnitudes(&(vectors_2 - vectors_1))
 }
 
-/// Magnitude of a slice 3x1.
-pub fn magnitude_slice<T>(vector: MatrixSlice3x1<T>) -> T
+/// Distance from a vector 3x1 to another one.
+pub fn distance<T>(vector_1: &Matrix3x1<T>, vector_2: &Matrix3x1<T>) -> T
 where
     T: RealField,
 {
-    (vector).norm()
+    (vector_2 - vector_1).norm()
 }
 
-/// Directions of a list of vectors 3xX.
-pub fn directions<T>(vectors: &Matrix3xX<T>) -> Matrix3xX<T>
+/// Unit vectors of a list of vectors 3xX.
+pub fn units<T>(vectors: &Matrix3xX<T>) -> Matrix3xX<T>
 where
     T: RealField,
 {
     let number_vectors = vectors.ncols();
     let mut directions = Matrix3xX::zeros(number_vectors);
     for (mut direction, vector) in multizip((directions.column_iter_mut(), vectors.column_iter())) {
-        direction.copy_from(&direction_slice(vector));
+        direction.copy_from(&vector.normalize());
     }
     directions
 }
 
-/// Direction of a vector 3x1.
-pub fn direction<T>(vector: &Matrix3x1<T>) -> Matrix3x1<T>
+/// Directions from of a list of vectors 3xX to another one.
+pub fn directions<T>(vectors_1: &Matrix3xX<T>, vectors_2: &Matrix3xX<T>) -> Matrix3xX<T>
 where
     T: RealField,
 {
-    direction_slice(vector.column(0))
+    units(&(vectors_2 - vectors_1))
 }
 
-/// Direction of a slice 3x1.
-pub fn direction_slice<T>(vector: MatrixSlice3x1<T>) -> Matrix3x1<T>
+/// Direction from a vector 3x1 to another one.
+pub fn direction<T>(vector_1: &Matrix3x1<T>, vector_2: &Matrix3x1<T>) -> Matrix3x1<T>
 where
     T: RealField,
 {
-    (vector).normalize()
+    (vector_2 - vector_1).normalize()
 }
 
 /// Component-wise cartesian to spherical conversion.

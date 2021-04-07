@@ -29,7 +29,7 @@ fn compute_directions() {
         1.0 / 2.0f64.sqrt(),
     ]);
 
-    let directions = tool::directions(&vectors);
+    let directions = tool::units(&vectors);
 
     for (direction_projection, expected_direction_projection) in
         multizip((directions.iter(), expected_directions.iter()))
