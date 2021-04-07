@@ -1,5 +1,5 @@
 use itertools::multizip;
-use na::{convert, Matrix1xX, Matrix3x1, Matrix3xX, MatrixSlice3x1, RealField};
+use na::{convert, Matrix1xX, Matrix3x1, Matrix3xX, RealField};
 
 /// Magnitudes of a list of vectors 3xX.
 pub fn magnitudes<T>(vectors: &Matrix3xX<T>) -> Matrix1xX<T>
