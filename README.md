@@ -35,7 +35,7 @@ Licensed under the [Apache License, Version 2.0][license link].
 [crate badge]: https://meritbadge.herokuapp.com/rustool?style=flat-square
 [doc link]: https://docs.rs/rustool
 [doc badge]: https://docs.rs/rustool/badge.svg
-[license link]: https://github.com/GregoireHENRY/rustool/blob/main/LICENSE
+[license link]: https://raw.githubusercontent.com/GregoireHENRY/rustool/main/LICENSE
 [license badge]: https://img.shields.io/badge/license-Apache%202.0-blue.svg
 [pre-commit link]: https://pre-commit.com
 [pre-commit badge]: https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white
