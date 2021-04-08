@@ -9,7 +9,7 @@ Simply add the following to your `Cargo.toml` file:
 
 ```.ignore
 [dependencies]
-rustool = "0.3.2"
+rustool = "0.3.3"
 ```
 */
 
@@ -31,13 +31,13 @@ use na::{Dynamic, Matrix, Matrix3xX, RowDVector, Scalar, SliceStorage, Vector3};
 use num_traits::{NumCast, ToPrimitive};
 use std::cmp::PartialOrd;
 
-/// Type alias for [`DVector`]. The matrix has X rows and 1 column.
+/// Type alias for [`DVector`]. The matrix has 1 row and X columns.
 pub type List<T> = RowDVector<T>;
 
-/// Type alias for [`Vector3`]. The matrix has 1 row and 3 columns.
+/// Type alias for [`Vector3`]. The matrix has 3 rows and 1 column.
 pub type Vector<T> = Vector3<T>;
 
-/// Type alias for [`MatrixXx3`]. The matrix has X row and 3 columns.
+/// Type alias for [`MatrixXx3`]. The matrix has 3 rows and X columns.
 pub type Vectors<T> = Matrix3xX<T>;
 
 /// Type alias to define a slice of the size of its matrix.

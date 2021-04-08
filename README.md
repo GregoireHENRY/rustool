@@ -23,7 +23,7 @@ Add the dependency **rustool** to your `Cargo.toml`:
 ```toml
 ...
 [dependencies]
-rustool = "0.3.2"
+rustool = "0.3.3"
 ```
 
 ## License
