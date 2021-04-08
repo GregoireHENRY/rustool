@@ -20,7 +20,7 @@ pub fn number_vectors<T>(vectors: &Vectors<T>) -> usize
 where
     T: RealField,
 {
-    vectors.nrows()
+    vectors.ncols()
 }
 
 /// Compute the required size for vector to go from start to end with step.

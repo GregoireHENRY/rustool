@@ -9,7 +9,7 @@ Simply add the following to your `Cargo.toml` file:
 
 ```.ignore
 [dependencies]
-rustool = "0.3.1"
+rustool = "0.3.2"
 ```
 */
 
@@ -27,18 +27,18 @@ extern crate simplelog;
 
 use alga::general::RingCommutative;
 use na::base::storage::Storage;
-use na::{DVector, Dynamic, Matrix, MatrixXx3, RowVector3, Scalar, SliceStorage};
+use na::{Dynamic, Matrix, Matrix3xX, RowDVector, Scalar, SliceStorage, Vector3};
 use num_traits::{NumCast, ToPrimitive};
 use std::cmp::PartialOrd;
 
 /// Type alias for [`DVector`]. The matrix has X rows and 1 column.
-pub type List<T> = DVector<T>;
+pub type List<T> = RowDVector<T>;
 
 /// Type alias for [`Vector3`]. The matrix has 1 row and 3 columns.
-pub type Vector<T> = RowVector3<T>;
+pub type Vector<T> = Vector3<T>;
 
 /// Type alias for [`MatrixXx3`]. The matrix has X row and 3 columns.
-pub type Vectors<T> = MatrixXx3<T>;
+pub type Vectors<T> = Matrix3xX<T>;
 
 /// Type alias to define a slice of the size of its matrix.
 pub type Slice<'a, N, R, C, S1> = Matrix<

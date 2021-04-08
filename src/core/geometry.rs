@@ -9,7 +9,7 @@ where
 {
     let size = crate::number_vectors(vectors);
     let mut magnitudes = List::<T>::zeros(size);
-    for (res, vector) in multizip((magnitudes.iter_mut(), vectors.row_iter())) {
+    for (res, vector) in multizip((magnitudes.iter_mut(), vectors.column_iter())) {
         *res = vector.norm();
     }
     magnitudes
@@ -38,7 +38,7 @@ where
 {
     let size = crate::number_vectors(vectors);
     let mut directions = Vectors::zeros(size);
-    for (mut direction, vector) in multizip((directions.row_iter_mut(), vectors.row_iter())) {
+    for (mut direction, vector) in multizip((directions.column_iter_mut(), vectors.column_iter())) {
         direction.copy_from(&vector.normalize());
     }
     directions
@@ -67,7 +67,9 @@ where
 {
     let size = crate::number_vectors(vectors);
     let mut sphericals = Vectors::zeros(size);
-    for (mut spherical, cartesian) in multizip((sphericals.row_iter_mut(), vectors.row_iter())) {
+    for (mut spherical, cartesian) in
+        multizip((sphericals.column_iter_mut(), vectors.column_iter()))
+    {
         if cartesian.norm() == convert(0.) {
             spherical.copy_from(&Vector::<T>::zeros());
         } else {

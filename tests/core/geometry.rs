@@ -2,8 +2,8 @@ use itertools::multizip;
 
 #[test]
 fn compute_distances() {
-    let vectors = tool::Vectors::from_row_slice(&[1.0, 0.0, 0.0, 0.0, 1.0, 1.0]);
-    let expected_distances = tool::List::from_row_slice(&[1.0, 2.0f64.sqrt()]);
+    let vectors = tool::Vectors::from_column_slice(&[1.0, 0.0, 0.0, 0.0, 1.0, 1.0]);
+    let expected_distances = tool::List::from_column_slice(&[1.0, 2.0f64.sqrt()]);
 
     let distances = tool::magnitudes(&vectors);
 
@@ -18,8 +18,8 @@ fn compute_distances() {
 
 #[test]
 fn compute_directions() {
-    let vectors = tool::Vectors::from_row_slice(&[1.0, 0.0, 0.0, 0.0, 1.0, 1.0]);
-    let expected_directions = tool::Vectors::from_row_slice(&[
+    let vectors = tool::Vectors::from_column_slice(&[1.0, 0.0, 0.0, 0.0, 1.0, 1.0]);
+    let expected_directions = tool::Vectors::from_column_slice(&[
         1.0,
         0.0,
         0.0,
