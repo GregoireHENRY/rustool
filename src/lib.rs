@@ -9,7 +9,7 @@ Simply add the following to your `Cargo.toml` file:
 
 ```.ignore
 [dependencies]
-rustool = "0.3.4"
+rustool = "0.3.5"
 ```
 */
 

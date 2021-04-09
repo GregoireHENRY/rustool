@@ -55,8 +55,8 @@ where
     let mut dot_products = List::<T>::zeros(size);
     for (res, vector_1, vector_2) in multizip((
         dot_products.iter_mut(),
-        vectors_1.row_iter(),
-        vectors_2.row_iter(),
+        vectors_1.column_iter(),
+        vectors_2.column_iter(),
     )) {
         *res = vector_1.dot(&vector_2);
     }

@@ -9,52 +9,64 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.5] - 2021-04-09
+
+### Fixed
+
++ dot product by columns
+
 ## [0.3.4] - 2021-04-09
 
-+ added module constants
+### Added
+
++ module constants
 
 ## [0.3.3] - 2021-04-09
 
-+ added constants
+### Added
+
++ constants
 
 ## [0.3.2] - 2021-04-08
+
+### Changed
 
 + column-major types
 
 ## [0.3.1] - 2021-04-07
 
-## Added
+### Added
 
 + SuperScalar type
 
 ## [0.3.0] - 2021-04-07
 
-## Added
+### Added
 
 + types List, Vector, Vectors
 
-## Changed
+### Changed
 
 + list of vectors and list of scalars shapes
 
 ## [0.2.1] - 2021-04-06
 
-## Added
+### Added
 
 + distances and directions functions
 
-## Changed
+### Changed
 
 + rename directions to units
 
 ## [0.2.0] - 2021-04-06
 
-## Added
+### Added
 
 + added more dot products signatures
 + added more signatures
 
-## Changed
+### Changed
 
 + rename dot_vectors to dot_products
 + rename distances to magnitudes
