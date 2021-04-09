@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.3] - 2021-04-09
+
++ added constants
+
 ## [0.3.2] - 2021-04-08
 
 + column-major types
