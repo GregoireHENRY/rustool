@@ -6,6 +6,7 @@ pub mod log;
 /// Constants.
 pub mod constants;
 /// Json toolbox.
+#[macro_use]
 pub mod json;
 /// Collection of functions for matrix usage.
 pub mod matrix;

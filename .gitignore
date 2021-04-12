@@ -6,3 +6,4 @@ Cargo.lock
 rsc/img/
 rsc/data/
 rsc/log/
+rsc/tests/
