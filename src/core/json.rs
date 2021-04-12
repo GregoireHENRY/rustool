@@ -25,7 +25,7 @@ macro_rules! addjs {
         use serde_json::{from_str, to_string_pretty};
         $(
             let json_value = from_str(&to_string_pretty(&$value).unwrap()).unwrap();
-            $map.insert($key.into(), json_value);
+            $map[$key] = json_value;
         )*
         $map
     }}
@@ -35,8 +35,8 @@ macro_rules! addjs {
 #[macro_export]
 macro_rules! newjs {
     ($(($key:expr, $value:expr)), *) => {{
-        use std::collections::BTreeMap;
-        let mut map = BTreeMap::new();
+        use serde_json::json;
+        let mut map = json!({});
         $crate::addjs!(&mut map, $(($key, $value)), *);
         map
     }}
