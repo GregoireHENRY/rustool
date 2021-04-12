@@ -2,7 +2,7 @@ use crate::{List, Vector, Vectors};
 use itertools::multizip;
 use na::{convert, RealField};
 
-/// Magnitudes of a list of vectors.
+/// Magnitudes of a list of [`Vector`]s.
 pub fn magnitudes<T>(vectors: &Vectors<T>) -> List<T>
 where
     T: RealField,
@@ -15,7 +15,7 @@ where
     magnitudes
 }
 
-/// Distances from of a list of vectors to another one.
+/// Distances from of a list of [`Vector`]s to another one.
 pub fn distances<T>(vectors_1: &Vectors<T>, vectors_2: &Vectors<T>) -> List<T>
 where
     T: RealField,
@@ -23,7 +23,7 @@ where
     magnitudes(&(vectors_2 - vectors_1))
 }
 
-/// Distance from a vector 3x1 to another one.
+/// Distance from a [`Vector`] to another one.
 pub fn distance<T>(vector_1: &Vector<T>, vector_2: &Vector<T>) -> T
 where
     T: RealField,
@@ -31,7 +31,7 @@ where
     (vector_2 - vector_1).norm()
 }
 
-/// Unit vectors of a list of vectors 3xX.
+/// Unit vectors of a list of [`Vector`]s.
 pub fn units<T>(vectors: &Vectors<T>) -> Vectors<T>
 where
     T: RealField,
@@ -44,7 +44,7 @@ where
     directions
 }
 
-/// Directions from of a list of vectors 3xX to another one.
+/// Directions from of a list of [`Vector`]s to another one.
 pub fn directions<T>(vectors_1: &Vectors<T>, vectors_2: &Vectors<T>) -> Vectors<T>
 where
     T: RealField,
@@ -52,7 +52,7 @@ where
     units(&(vectors_2 - vectors_1))
 }
 
-/// Direction from a vector 3x1 to another one.
+/// Direction from a [`Vector`] to another one.
 pub fn direction<T>(vector_1: &Vector<T>, vector_2: &Vector<T>) -> Vector<T>
 where
     T: RealField,
@@ -60,7 +60,7 @@ where
     (vector_2 - vector_1).normalize()
 }
 
-/// Component-wise cartesian to spherical conversion.
+/// Convert a list of [`Vector`]s from cartesian to spherical coordinates.
 pub fn cart_to_sph<T>(vectors: &Vectors<T>) -> Vectors<T>
 where
     T: RealField,

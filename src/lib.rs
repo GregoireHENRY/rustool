@@ -9,7 +9,7 @@ Simply add the following to your `Cargo.toml` file:
 
 ```.ignore
 [dependencies]
-rustool = "0.3.5"
+rustool = "0.3.6"
 ```
 */
 
@@ -37,7 +37,7 @@ pub type List<T> = RowDVector<T>;
 /// Type alias for [`Vector3`]. The matrix has 3 rows and 1 column.
 pub type Vector<T> = Vector3<T>;
 
-/// Type alias for [`MatrixXx3`]. The matrix has 3 rows and X columns.
+/// Type alias for [`Matrix3xX`]. The matrix has 3 rows and X columns.
 pub type Vectors<T> = Matrix3xX<T>;
 
 /// Type alias to define a slice of the size of its matrix.
@@ -55,8 +55,10 @@ pub type Slice<'a, N, R, C, S1> = Matrix<
     >,
 >;
 
-/// Trait that extends [`Scalar`] to create integer matrices like float matrices. It aims to be the
-/// equivalent of [`RealField`][nalgebra::RealField] but for integer.
+/// Trait that extends [`Scalar`] to create integer matrices like float matrices. Sometimes some
+/// functions that should be accessible to `usize` are not usable by Scalar, this type should help
+/// on using matrix with `usize`. It might be incomplete depending on your usage, this must be
+/// improved.
 pub trait SuperScalar:
     Scalar
     + RingCommutative

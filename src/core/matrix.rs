@@ -3,7 +3,7 @@ use itertools::multizip;
 use na::base::storage::Storage;
 use na::{convert, Dim, Matrix, Matrix1xX, RealField};
 
-/// Slice whole matrix
+/// Get the slice of the whole matrix.
 pub fn slice<N, R, C, S1>(matrix: &Matrix<N, R, C, S1>) -> crate::Slice<'_, N, R, C, S1>
 where
     N: RealField,
@@ -15,7 +15,7 @@ where
     matrix.slice((0, 0), shape)
 }
 
-/// Number of vectors.
+/// Get the number of [`Vector`]s.
 pub fn number_vectors<T>(vectors: &Vectors<T>) -> usize
 where
     T: RealField,
@@ -23,7 +23,8 @@ where
     vectors.ncols()
 }
 
-/// Compute the required size for vector to go from start to end with step.
+/// Compute the required size to go from `start` to `end` with `step`, including the end point (last
+/// time step can be smaller).
 pub fn size_range_with_step(start: f64, end: f64, step: f64) -> usize {
     let mut size = ((end - start) / step) as usize;
     if start + size as f64 * step < end {
@@ -32,9 +33,9 @@ pub fn size_range_with_step(start: f64, end: f64, step: f64) -> usize {
     size + 1
 }
 
-/// Create a vector from `start` to `end` with `step`. The last step might be smaller
-/// than `step` just to include `end` in the vector.
-pub fn linspace<T>(start: f64, end: f64, step: f64) -> Matrix1xX<T>
+/// Create a [`List`] from `start` to `end` with `step`. The last step can be smaller to include
+/// `end`.
+pub fn linspace<T>(start: f64, end: f64, step: f64) -> List<T>
 where
     T: RealField,
 {
@@ -46,7 +47,7 @@ where
     vector
 }
 
-/// Dot product vectorized between two list of vectors.
+/// Dot product component-wise between two lists of [`Vector`]s.
 pub fn dot_products<T>(vectors_1: &Vectors<T>, vectors_2: &Vectors<T>) -> List<T>
 where
     T: RealField,
@@ -63,8 +64,7 @@ where
     dot_products
 }
 
-/// Clip all elements of a list between `min` and `max`. If `min` or `max` are `None`
-/// there is no limit.
+/// Clip all elements of a [`List`] between `min` and `max`. A `None` value indicates no limit.
 pub fn clip<T>(list: &List<T>, min: Option<T>, max: Option<T>) -> List<T>
 where
     T: RealField,
@@ -85,7 +85,7 @@ where
     work_list
 }
 
-/// Compute the element-wise power of a list.
+/// Compute the element-wise power of a [`List`].
 pub fn pows<T>(list: &List<T>, power: i32) -> List<T>
 where
     T: RealField,
