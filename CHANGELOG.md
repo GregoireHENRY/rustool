@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.8] - 2021-04-13
+
++ add projection vector computations
+
 ## [0.3.7] - 2021-04-13
 
 + replaced json btreemap by Value with json macro

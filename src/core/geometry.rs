@@ -82,3 +82,36 @@ where
     }
     sphericals
 }
+
+/// Dot product component-wise between two lists of [`Vector`]s.
+pub fn dot_products<T>(vectors_1: &Vectors<T>, vectors_2: &Vectors<T>) -> List<T>
+where
+    T: RealField,
+{
+    let size = crate::number_vectors(vectors_1);
+    let mut dot_products = List::<T>::zeros(size);
+    for (res, vector_1, vector_2) in multizip((
+        dot_products.iter_mut(),
+        vectors_1.column_iter(),
+        vectors_2.column_iter(),
+    )) {
+        *res = vector_1.dot(&vector_2);
+    }
+    dot_products
+}
+
+/// Project the first [`Vector`] onto the second one.
+pub fn projection_vector<T>(vector_1: &Vector<T>, vector_2: &Vector<T>) -> Vector<T>
+where
+    T: RealField,
+{
+    vector_2 * vector_1.dot(vector_2) / vector_2.norm().powi(2)
+}
+
+/// Project the first [`Vector`] onto the plane defined the second [`Vector`] (normal of the plane).
+pub fn projection_plane<T>(vector_1: &Vector<T>, vector_2: &Vector<T>) -> Vector<T>
+where
+    T: RealField,
+{
+    vector_1 - projection_vector(vector_1, vector_2)
+}

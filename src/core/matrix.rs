@@ -1,5 +1,4 @@
 use crate::{List, Vectors};
-use itertools::multizip;
 use na::base::storage::Storage;
 use na::{convert, Dim, Matrix, Matrix1xX, RealField};
 
@@ -45,23 +44,6 @@ where
         vector[size - 1] = convert(end);
     }
     vector
-}
-
-/// Dot product component-wise between two lists of [`Vector`]s.
-pub fn dot_products<T>(vectors_1: &Vectors<T>, vectors_2: &Vectors<T>) -> List<T>
-where
-    T: RealField,
-{
-    let size = crate::number_vectors(vectors_1);
-    let mut dot_products = List::<T>::zeros(size);
-    for (res, vector_1, vector_2) in multizip((
-        dot_products.iter_mut(),
-        vectors_1.column_iter(),
-        vectors_2.column_iter(),
-    )) {
-        *res = vector_1.dot(&vector_2);
-    }
-    dot_products
 }
 
 /// Clip all elements of a [`List`] between `min` and `max`. A `None` value indicates no limit.
