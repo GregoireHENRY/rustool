@@ -141,3 +141,23 @@ where
 {
     vector_1 - projection_vector(vector_1, vector_2)
 }
+
+/// Compute the direct angle from 0 to 2 PI between two vectors and an upward vector.
+///
+/// ## Definition
+///
+/// The direct angle is defined as the angle between the two vectors, from 0 to
+/// [$\tau$][crate::TAU]. It is opposed to the smallest angle between two vectors, from 0 to $\pi$.
+/// The direct angle is built using the normal vector from the plane defined by the two vectors.
+pub fn direct_angle<T>(v1: &Vector<T>, v2: &Vector<T>, up: &Vector<T>) -> T
+where
+    T: RealField,
+{
+    let mut ang = v1.angle(v2);
+    let normal = v1.cross(v2);
+    let test = up.cross(&normal)[0];
+    if test < T::zero() {
+        ang = T::two_pi() - ang;
+    }
+    ang
+}
