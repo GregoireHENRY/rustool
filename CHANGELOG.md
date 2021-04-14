@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.10] - 2021-04-14
+
++ add Unit Vector3 alias
+
 ## [0.3.9] - 2021-04-14
 
 + improve documentation

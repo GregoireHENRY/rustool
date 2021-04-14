@@ -27,7 +27,7 @@ extern crate simplelog;
 
 use alga::general::RingCommutative;
 use na::base::storage::Storage;
-use na::{Dynamic, Matrix, Matrix3xX, RowDVector, Scalar, SliceStorage, Vector3};
+use na::{Dynamic, Matrix, Matrix3xX, RowDVector, Scalar, SliceStorage, UnitVector3, Vector3};
 use num_traits::{NumCast, ToPrimitive};
 use std::cmp::PartialOrd;
 
@@ -36,6 +36,9 @@ pub type List<T> = RowDVector<T>;
 
 /// Type alias for [`Vector3`]. The matrix has 3 rows and 1 column.
 pub type Vector<T> = Vector3<T>;
+
+/// Type alias for [`UnitVector3`]. The matrix has 3 rows and 1 column.
+pub type Unit<T> = UnitVector3<T>;
 
 /// Type alias for [`Matrix3xX`]. The matrix has 3 rows and X columns.
 pub type Vectors<T> = Matrix3xX<T>;
