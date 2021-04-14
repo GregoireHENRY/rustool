@@ -155,7 +155,7 @@ where
 {
     let mut ang = v1.angle(v2);
     let normal = v1.cross(v2);
-    let test = up.cross(&normal)[0];
+    let test = up.dotc(&normal);
     if test < T::zero() {
         ang = T::two_pi() - ang;
     }

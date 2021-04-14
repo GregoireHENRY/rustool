@@ -1,5 +1,5 @@
 use itertools::multizip;
-use tool::{List, Vector, Vectors};
+use tool::{direct_angle, List, Vector, Vectors};
 
 #[test]
 fn compute_distances() {
@@ -84,4 +84,26 @@ fn projection_plane() {
             epsilon = f64::EPSILON
         ));
     }
+}
+
+#[test]
+fn test_direct_angle_positive() {
+    let v1 = Vector::new(1.0, 0.0, 0.0);
+    let v2 = Vector::new(1.0, 1.0, 0.0);
+    let up = Vector::new(0.0, 0.0, 1.0);
+    let ang = direct_angle(&v1, &v2, &up);
+    assert!(relative_eq!(
+        ang,
+        0.7853981633974484,
+        epsilon = f64::EPSILON
+    ));
+}
+
+#[test]
+fn test_direct_angle_negative() {
+    let v1 = Vector::new(1.0, 0.0, 0.0);
+    let v2 = Vector::new(1.0, -1.0, 0.0);
+    let up = Vector::new(0.0, 0.0, 1.0);
+    let ang = direct_angle(&v1, &v2, &up);
+    assert!(relative_eq!(ang, 5.497787143782138, epsilon = f64::EPSILON));
 }
