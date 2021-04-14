@@ -9,7 +9,7 @@ Simply add the following to your `Cargo.toml` file:
 
 ```.ignore
 [dependencies]
-rustool = "0.3.8"
+rustool = "*" // replace * by the latest version of the crate
 ```
 */
 
@@ -31,7 +31,7 @@ use na::{Dynamic, Matrix, Matrix3xX, RowDVector, Scalar, SliceStorage, Vector3};
 use num_traits::{NumCast, ToPrimitive};
 use std::cmp::PartialOrd;
 
-/// Type alias for [`DVector`]. The matrix has 1 row and X columns.
+/// Type alias for [`RowDVector`]. The matrix has 1 row and X columns.
 pub type List<T> = RowDVector<T>;
 
 /// Type alias for [`Vector3`]. The matrix has 3 rows and 1 column.

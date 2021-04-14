@@ -61,6 +61,15 @@ where
 }
 
 /// Convert a list of [`Vector`]s from cartesian to spherical coordinates.
+///
+/// ## Expression
+///
+/// $$\theta={\rm arctan2}\left(q_y, q_x\right)$$
+/// $$\phi=\arcsin\left(\frac{q_z}{\left\Vert\bm{q}\right\Vert}\right)$$
+/// $$\rho=\left\Vert\bm{q}\right\Vert$$
+///
+/// where $\theta$ is the azimuth, $\phi$ is the elevation, $\rho$ the radius, and $\bm{q}$ the
+/// cartesian vector.
 pub fn cart_to_sph<T>(vectors: &Vectors<T>) -> Vectors<T>
 where
     T: RealField,
@@ -101,6 +110,12 @@ where
 }
 
 /// Project the first [`Vector`] onto the second one.
+///
+/// ## Expression
+///
+/// The projection of $\bm{u}$ onto $\bm{v}$ is defined as,
+///
+/// $${\rm proj}_{\bm{v}}\left(\bm{u}\right)=\frac{\bm{u}\cdot\bm{v}}{\left\Vert\bm{v}\right\Vert}\frac{\bm{v}}{\left\Vert\bm{v}\right\Vert}$$
 pub fn projection_vector<T>(vector_1: &Vector<T>, vector_2: &Vector<T>) -> Vector<T>
 where
     T: RealField,
@@ -108,7 +123,18 @@ where
     vector_2 * vector_1.dot(vector_2) / vector_2.norm().powi(2)
 }
 
-/// Project the first [`Vector`] onto the plane defined the second [`Vector`] (normal of the plane).
+/// Project the first [`Vector`] onto the plane described the second [`Vector`] (normal of the plane).
+///
+/// ## Expression
+///
+/// The projection of $\bm{u}$ onto the plane described by its normal $\bm{v}$ is defined by
+/// substracting the component of $\bm{u}$ that is orthogonal to the plane, from $\bm{u}$. The
+/// projection is given by,
+///
+/// $$\mathrm{proj}\_{\mathrm{plane}\left(\bm{v}\right)}\left(\bm{u}\right)=\bm{u}-\mathrm{proj}_{\bm{v}}\left(\bm{u}\right)$$
+///
+/// where ${\rm proj}_{\bm{v}}\left(\bm{u}\right)$ is the [vector projection][projection_vector] of
+/// $\bm{u}$ onto $\bm{v}$.
 pub fn projection_plane<T>(vector_1: &Vector<T>, vector_2: &Vector<T>) -> Vector<T>
 where
     T: RealField,

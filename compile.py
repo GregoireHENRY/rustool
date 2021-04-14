@@ -54,9 +54,13 @@ import sys
 import click
 from pudb import set_trace as bp  # noqa
 
+# Constants.
+PWD = os.getcwd()
+
 # Parameters.
 TEST_FLAGS = "-- --color always --nocapture "
 RUST_BACKTRACE = "full"
+RUSTDOCFLAGS = f"--html-in-header {PWD}/rsc/html/docs-header.html"
 
 # Initialization.
 MANIFEST_FILE = Path("Cargo.toml")
@@ -78,8 +82,8 @@ REGEX_VERSION.update(
 
 def export_environment_variables() -> None:
     """Export environment variables."""
-    if os.environ.get("RUST_BACKTRACE") != RUST_BACKTRACE:
-        os.environ["RUST_BACKTRACE"] = RUST_BACKTRACE
+    os.environ["RUST_BACKTRACE"] = RUST_BACKTRACE
+    os.environ["RUSTDOCFLAGS"] = RUSTDOCFLAGS
 
 
 def build(command: str, flags: str = "") -> None:

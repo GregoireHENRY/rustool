@@ -14,7 +14,7 @@ where
     matrix.slice((0, 0), shape)
 }
 
-/// Get the number of [`Vector`]s.
+/// Get the number of [`Vector`][crate::Vector]s.
 pub fn number_vectors<T>(vectors: &Vectors<T>) -> usize
 where
     T: RealField,
