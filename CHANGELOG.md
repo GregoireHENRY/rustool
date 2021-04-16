@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.12] - 2021-04-16
+
++ add year and AU constants
+
 ## [0.3.11] - 2021-04-14
 
 + add direct angle
