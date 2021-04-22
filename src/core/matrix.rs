@@ -1,11 +1,13 @@
 use crate::{List, Vectors};
 use na::base::storage::Storage;
-use na::{convert, Dim, Matrix, Matrix1xX, RealField};
+use na::{ClosedAdd, ClosedDiv, ClosedMul, ClosedSub, Dim, Matrix, Matrix1xX, RealField, Scalar};
+use num_traits::{cast, NumCast};
+use std::cmp::PartialOrd;
 
 /// Get the slice of the whole matrix.
 pub fn slice<N, R, C, S1>(matrix: &Matrix<N, R, C, S1>) -> crate::Slice<'_, N, R, C, S1>
 where
-    N: RealField,
+    N: Scalar,
     R: Dim,
     C: Dim,
     S1: Storage<N, R, C>,
@@ -17,16 +19,19 @@ where
 /// Get the number of [`Vector`][crate::Vector]s.
 pub fn number_vectors<T>(vectors: &Vectors<T>) -> usize
 where
-    T: RealField,
+    T: Scalar,
 {
     vectors.ncols()
 }
 
 /// Compute the required size to go from `start` to `end` with `step`, including the end point (last
 /// time step can be smaller).
-pub fn size_range_with_step(start: f64, end: f64, step: f64) -> usize {
-    let mut size = ((end - start) / step) as usize;
-    if start + size as f64 * step < end {
+pub fn size_range_with_step<T>(start: T, end: T, step: T) -> usize
+where
+    T: Scalar + NumCast + Copy + ClosedAdd + ClosedSub + ClosedDiv + ClosedMul + PartialOrd,
+{
+    let mut size: usize = cast((end - start) / step).unwrap();
+    if start + cast::<usize, T>(size).unwrap() * step < end {
         size += 1;
     }
     size + 1
@@ -34,14 +39,14 @@ pub fn size_range_with_step(start: f64, end: f64, step: f64) -> usize {
 
 /// Create a [`List`] from `start` to `end` with `step`. The last step can be smaller to include
 /// `end`.
-pub fn linspace<T>(start: f64, end: f64, step: f64) -> List<T>
+pub fn linspace<T>(start: T, end: T, step: T) -> List<T>
 where
-    T: RealField,
+    T: Scalar + NumCast + ClosedSub + ClosedDiv + ClosedMul + ClosedAdd + PartialOrd + Copy,
 {
     let size = size_range_with_step(start, end, step);
-    let mut vector = Matrix1xX::from_fn(size, |_, j| convert(start + step * j as f64));
-    if vector[size - 1] > convert(end) {
-        vector[size - 1] = convert(end);
+    let mut vector = Matrix1xX::from_fn(size, |_, j| start + step * cast(j).unwrap());
+    if vector[size - 1] > end {
+        vector[size - 1] = end;
     }
     vector
 }

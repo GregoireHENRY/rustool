@@ -31,7 +31,7 @@ fn test_linspace() {
     let step = 2.0;
     let expected_list = tool::List::from_column_slice(&[0.0, 2.0, 4.0, 6.0, 8.0, 10.0]);
 
-    let list = tool::linspace::<f64>(start, end, step);
+    let list = tool::linspace(start, end, step);
 
     assert_eq!(list.len(), 6);
 
@@ -53,5 +53,21 @@ fn test_linspace_odd() {
 
     for (value, expected_value) in multizip((list.iter(), expected_list.iter())) {
         assert!(relative_eq!(value, expected_value, epsilon = f64::EPSILON));
+    }
+}
+
+#[test]
+fn test_linspace_integer() {
+    let start = 0;
+    let end = 10;
+    let step = 2;
+    let expected_list = tool::List::from_column_slice(&[0, 2, 4, 6, 8, 10]);
+
+    let list = tool::linspace(start, end, step);
+
+    assert_eq!(list.len(), 6);
+
+    for (value, expected_value) in multizip((list.iter(), expected_list.iter())) {
+        assert_eq!(value, expected_value);
     }
 }

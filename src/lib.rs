@@ -25,11 +25,8 @@ extern crate nalgebra as na;
 extern crate num_traits;
 extern crate simplelog;
 
-use alga::general::RingCommutative;
 use na::base::storage::Storage;
-use na::{Dynamic, Matrix, Matrix3xX, RowDVector, Scalar, SliceStorage, UnitVector3, Vector3};
-use num_traits::{NumCast, ToPrimitive};
-use std::cmp::PartialOrd;
+use na::{Dynamic, Matrix, Matrix3xX, RowDVector, SliceStorage, UnitVector3, Vector3};
 
 /// Type alias for [`RowDVector`]. The matrix has 1 row and X columns.
 pub type List<T> = RowDVector<T>;
@@ -57,31 +54,3 @@ pub type Slice<'a, N, R, C, S1> = Matrix<
         <S1 as Storage<N, R, C>>::CStride,
     >,
 >;
-
-/// Trait that extends [`Scalar`] to create integer matrices like float matrices. Sometimes some
-/// functions that should be accessible to `usize` are not usable by Scalar, this type should help
-/// on using matrix with `usize`. It might be incomplete depending on your usage, this must be
-/// improved.
-pub trait SuperScalar:
-    Scalar
-    + RingCommutative
-    + PartialOrd
-    + std::ops::Div
-    + ToPrimitive
-    + NumCast
-    + Copy
-    + serde::ser::Serialize
-{
-}
-
-impl<T> SuperScalar for T where
-    T: Scalar
-        + RingCommutative
-        + PartialOrd
-        + std::ops::Div
-        + ToPrimitive
-        + NumCast
-        + Copy
-        + serde::ser::Serialize
-{
-}

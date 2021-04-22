@@ -1,6 +1,6 @@
 [package]
 name = "rustool"
-version = "0.3.13"
+version = "0.3.14"
 authors = ["Greg Henry <contact@greghenry.xyz>"]
 edition = "2018"
 description = "Personal toolbox for my Rust projects"
@@ -21,7 +21,7 @@ rustdoc-args = [ "--html-in-header", "rsc/html/docs-header.html" ]
 
 [dependencies]
 itertools = "0.10.0"
-nalgebra = {version = "0.25.4", features = ["serde-serialize"]}
+nalgebra = {version = "0.26.1", features = ["serde-serialize"]}
 alga = "0.9.3"
 approx = "0.4.0"
 log = "0.4"
