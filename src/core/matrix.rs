@@ -1,19 +1,22 @@
 use crate::{List, Vectors};
-use na::base::storage::Storage;
-use na::{ClosedAdd, ClosedDiv, ClosedMul, ClosedSub, Dim, Matrix, Matrix1xX, RealField, Scalar};
+use na::{
+    storage::Storage, ClosedAdd, ClosedDiv, ClosedMul, ClosedSub, Dim, Dynamic, Matrix, Matrix1xX,
+    MatrixSlice, RealField, Scalar,
+};
 use num_traits::{cast, NumCast};
 use std::cmp::PartialOrd;
 
 /// Get the slice of the whole matrix.
-pub fn slice<N, R, C, S1>(matrix: &Matrix<N, R, C, S1>) -> crate::Slice<'_, N, R, C, S1>
+pub fn slice<T, R, C, S>(
+    matrix: &Matrix<T, R, C, S>,
+) -> MatrixSlice<'_, T, Dynamic, Dynamic, S::RStride, S::CStride>
 where
-    N: Scalar,
+    T: Scalar,
     R: Dim,
     C: Dim,
-    S1: Storage<N, R, C>,
+    S: Storage<T, R, C>,
 {
-    let shape = matrix.shape();
-    matrix.slice((0, 0), shape)
+    matrix.slice((0, 0), matrix.shape())
 }
 
 /// Get the number of [`Vector`][crate::Vector]s.

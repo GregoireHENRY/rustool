@@ -25,8 +25,7 @@ extern crate nalgebra as na;
 extern crate num_traits;
 extern crate simplelog;
 
-use na::base::storage::Storage;
-use na::{Dynamic, Matrix, Matrix3xX, RowDVector, SliceStorage, UnitVector3, Vector3};
+use na::{Matrix3xX, RowDVector, UnitVector3, Vector3};
 
 /// Type alias for [`RowDVector`]. The matrix has 1 row and X columns.
 pub type List<T> = RowDVector<T>;
@@ -39,18 +38,3 @@ pub type Unit<T> = UnitVector3<T>;
 
 /// Type alias for [`Matrix3xX`]. The matrix has 3 rows and X columns.
 pub type Vectors<T> = Matrix3xX<T>;
-
-/// Type alias to define a slice of the size of its matrix.
-pub type Slice<'a, N, R, C, S1> = Matrix<
-    N,
-    Dynamic,
-    Dynamic,
-    SliceStorage<
-        'a,
-        N,
-        Dynamic,
-        Dynamic,
-        <S1 as Storage<N, R, C>>::RStride,
-        <S1 as Storage<N, R, C>>::CStride,
-    >,
->;
