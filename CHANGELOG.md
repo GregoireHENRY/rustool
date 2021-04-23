@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.15] - 2021-04-22
+
 ## [0.3.14] - 2021-04-22
 
 + using nalgebra 0.26
