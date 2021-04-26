@@ -9,45 +9,73 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [0.3.15] - 2021-04-22
+## [0.3.15] - 2021-04-26
+
+### Added
+
++ more test to linspace function
 
 ## [0.3.14] - 2021-04-22
 
-+ using nalgebra 0.26
+### Changed
+
++ now using nalgebra 0.26
+
+### Added
+
 + more generic functions
 
 ## [0.3.13] - 2021-04-16
 
-+ clean release
+### Changed
+
++ some format for a clean release
 
 ## [0.3.12] - 2021-04-16
 
-+ add year and AU constants
+### Added
+
++ year and AU constants
 
 ## [0.3.11] - 2021-04-14
 
-+ add direct angle
+### Added
+
++ direct angle
 
 ## [0.3.10] - 2021-04-14
 
-+ add Unit Vector3 alias
+### Added
+
++ Unit Vector3 alias
 
 ## [0.3.9] - 2021-04-14
 
-+ improve documentation
+### Added
+
++ documentation
 
 ## [0.3.8] - 2021-04-13
 
-+ add projection vector computations
+### Added
+
++ projection vector computations
 
 ## [0.3.7] - 2021-04-13
 
-+ replaced json btreemap by Value with json macro
+### Changed
+
++ json btreemap by Value with json macro
 
 ## [0.3.6] - 2021-04-13
 
-+ add json toolbox
-+ rephrased some documentation
+### Added
+
++ json toolbox
+
+### Changed
+
++ documentation
 
 ## [0.3.5] - 2021-04-09
 

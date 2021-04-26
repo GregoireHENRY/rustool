@@ -1,7 +1,7 @@
 extern crate nalgebra as na;
 
 fn main() {
-    let v = na::Vector3::new(1.0, 0.0, 0.0);
+    let v = tool::linspace::<f64>(0.0, 2.0, 1.0);
 
-    println!("{}", v);
+    println!("{}", v.transpose());
 }

@@ -3,7 +3,7 @@ use na::{
     storage::Storage, ClosedAdd, ClosedDiv, ClosedMul, ClosedSub, Dim, Dynamic, Matrix, Matrix1xX,
     MatrixSlice, RealField, Scalar,
 };
-use num_traits::{cast, NumCast};
+use num_traits::{cast, NumCast, Signed, Zero};
 use std::cmp::PartialOrd;
 
 /// Get the slice of the whole matrix.
@@ -33,6 +33,15 @@ pub fn size_range_with_step<T>(start: T, end: T, step: T) -> usize
 where
     T: Scalar + NumCast + Copy + ClosedAdd + ClosedSub + ClosedDiv + ClosedMul + PartialOrd,
 {
+    if Zero::is_zero(&cast::<T, f64>(step).unwrap())
+        || Zero::is_zero(&cast::<T, f64>(end - start).unwrap())
+        || (Signed::is_positive(&cast::<T, f64>(end - start).unwrap())
+            && Signed::is_negative(&cast::<T, f64>(step).unwrap()))
+        || (Signed::is_negative(&cast::<T, f64>(end - start).unwrap())
+            && Signed::is_positive(&cast::<T, f64>(step).unwrap()))
+    {
+        return 1;
+    }
     let mut size: usize = cast((end - start) / step).unwrap();
     if start + cast::<usize, T>(size).unwrap() * step < end {
         size += 1;
