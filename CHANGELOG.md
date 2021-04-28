@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.3.16] - 2021-04-26
 
+### Added
+
++ slice of types
+
 ## [0.3.15] - 2021-04-26
 
 ### Added
