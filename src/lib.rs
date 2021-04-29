@@ -24,6 +24,8 @@ extern crate log;
 extern crate nalgebra as na;
 extern crate num_traits;
 extern crate simplelog;
+#[macro_use]
+extern crate approx;
 
 use na::{
     Dynamic, Matrix, Matrix3xX, MatrixSlice3xX, RowDVector, SliceStorage, UnitVector3, Vector3,

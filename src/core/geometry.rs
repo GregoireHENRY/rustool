@@ -1,6 +1,7 @@
 use crate::{List, Vector, Vectors, VectorsGeneric};
 use itertools::multizip;
-use na::{convert, storage::Storage, Dynamic, RealField, U3};
+use na::{storage::Storage, Dynamic, RealField, U3};
+use num_traits::{cast, NumCast};
 
 /// Magnitudes of a list of [`Vector`]s.
 pub fn magnitudes<T>(vectors: &Vectors<T>) -> List<T>
@@ -72,15 +73,18 @@ where
 /// cartesian vector.
 pub fn cart_to_sph<T, S>(vectors: &VectorsGeneric<T, S>) -> Vectors<T>
 where
-    T: RealField,
+    T: RealField + NumCast,
     S: Storage<T, U3, Dynamic>,
 {
+    // Allocation.
     let size = vectors.ncols();
     let mut sphericals = Vectors::zeros(size);
+
+    // Computation.
     for (mut spherical, cartesian) in
         multizip((sphericals.column_iter_mut(), vectors.column_iter()))
     {
-        if cartesian.norm() == convert(0.) {
+        if relative_eq!(cast::<T, f64>(cartesian.norm()).unwrap(), 0.0) {
             spherical.copy_from(&Vector::<T>::zeros());
         } else {
             spherical.copy_from_slice(&[
