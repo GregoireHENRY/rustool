@@ -27,7 +27,7 @@ extern crate simplelog;
 
 use na::{
     Dynamic, Matrix, Matrix3xX, MatrixSlice3xX, RowDVector, SliceStorage, UnitVector3, Vector3,
-    VectorSlice3, U1,
+    VectorSlice3, U1, U3,
 };
 
 /// Type alias for [`RowDVector`]. The matrix has 1 row and X columns.
@@ -53,3 +53,6 @@ pub type Vectors<T> = Matrix3xX<T>;
 /// Type alias for [`MatrixSlice3xX`]. The matrix does not own the data and has 3 rows and X column.
 /// See [`Vectors`] for list of owned vector data.
 pub type VectorsSlice<'a, T> = MatrixSlice3xX<'a, T>;
+
+/// Type alias for [`Matrix3xX`]. The matrix has 3 rows and X columns.
+pub type VectorsGeneric<T, S> = Matrix<T, U3, Dynamic, S>;

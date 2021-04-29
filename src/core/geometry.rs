@@ -1,6 +1,6 @@
-use crate::{List, Vector, Vectors};
+use crate::{List, Vector, Vectors, VectorsGeneric};
 use itertools::multizip;
-use na::{convert, RealField};
+use na::{convert, storage::Storage, Dynamic, RealField, U3};
 
 /// Magnitudes of a list of [`Vector`]s.
 pub fn magnitudes<T>(vectors: &Vectors<T>) -> List<T>
@@ -70,11 +70,12 @@ where
 ///
 /// where $\theta$ is the azimuth, $\phi$ is the elevation, $\rho$ the radius, and $\bm{q}$ the
 /// cartesian vector.
-pub fn cart_to_sph<T>(vectors: &Vectors<T>) -> Vectors<T>
+pub fn cart_to_sph<T, S>(vectors: &VectorsGeneric<T, S>) -> Vectors<T>
 where
     T: RealField,
+    S: Storage<T, U3, Dynamic>,
 {
-    let size = crate::number_vectors(vectors);
+    let size = vectors.ncols();
     let mut sphericals = Vectors::zeros(size);
     for (mut spherical, cartesian) in
         multizip((sphericals.column_iter_mut(), vectors.column_iter()))
