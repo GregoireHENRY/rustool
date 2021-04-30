@@ -1,7 +1,7 @@
-use crate::{List, Vectors};
+use crate::{List, VectorsGeneric};
 use na::{
     storage::Storage, ClosedAdd, ClosedDiv, ClosedMul, ClosedSub, Dim, Dynamic, Matrix, Matrix1xX,
-    MatrixSlice, RealField, Scalar,
+    MatrixSlice, RealField, Scalar, U3,
 };
 use num_traits::{cast, NumCast, Signed, Zero};
 use std::cmp::PartialOrd;
@@ -20,9 +20,10 @@ where
 }
 
 /// Get the number of [`Vector`][crate::Vector]s.
-pub fn number_vectors<T>(vectors: &Vectors<T>) -> usize
+pub fn number_vectors<T, S>(vectors: &VectorsGeneric<T, S>) -> usize
 where
     T: Scalar,
+    S: Storage<T, U3, Dynamic>,
 {
     vectors.ncols()
 }

@@ -4,9 +4,10 @@ use na::{storage::Storage, Dynamic, RealField, U3};
 use num_traits::{cast, NumCast};
 
 /// Magnitudes of a list of [`Vector`]s.
-pub fn magnitudes<T>(vectors: &Vectors<T>) -> List<T>
+pub fn magnitudes<T, S>(vectors: &VectorsGeneric<T, S>) -> List<T>
 where
     T: RealField,
+    S: Storage<T, U3, Dynamic>,
 {
     let size = crate::number_vectors(vectors);
     let mut magnitudes = List::<T>::zeros(size);
