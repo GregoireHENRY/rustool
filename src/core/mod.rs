@@ -12,10 +12,14 @@ pub mod json;
 pub mod matrix;
 /// Numerical algorithms toolbox.
 pub mod numerical_algorithms;
+/// General macros.
+#[macro_use]
+pub mod macros;
 
 pub use self::constants::*;
 pub use self::geometry::*;
 pub use self::json::*;
 pub use self::log::*;
+pub use self::macros::*;
 pub use self::matrix::*;
 pub use self::numerical_algorithms::*;

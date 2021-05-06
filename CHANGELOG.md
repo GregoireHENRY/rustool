@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.19] - 2021-05-06
+
+### Added
+
++ generic macros module
+
 ## [0.3.18] - 2021-04-26
 
 ### Added
