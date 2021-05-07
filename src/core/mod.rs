@@ -15,8 +15,11 @@ pub mod numerical_algorithms;
 /// General macros.
 #[macro_use]
 pub mod macros;
+/// General functions.
+pub mod general;
 
 pub use self::constants::*;
+pub use self::general::*;
 pub use self::geometry::*;
 pub use self::json::*;
 pub use self::log::*;
